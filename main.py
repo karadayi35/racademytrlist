@@ -5,7 +5,7 @@ import time
 from telegram import Bot
 
 # Telegram bot token ve kanal ID'si
-TOKEN = "7896454860:AAGYvWzFQG1TXFDum21qcMLorUDz5TaFuQM"  # BotFather'dan aldığınız API token
+TOKEN = "8173433982:AAGacqHiXWLYxAcYL8eiGsiiEx-QGvLwpJ4"  # BotFather'dan aldığınız API token
 CHAT_ID = "-1002188591527"  # Kanal ID'niz
 
 # Botu başlatın
