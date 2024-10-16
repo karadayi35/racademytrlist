@@ -11,6 +11,7 @@ CHAT_ID = "-1002188591527"  # Kanal ID'niz
 # Botu başlatın
 bot = Bot(token=TOKEN)
 
+
 # Asenkron mesaj gönderme fonksiyonu
 async def send_message_with_image():
     try:
@@ -20,6 +21,7 @@ async def send_message_with_image():
             # Mesaj metni
             crown_emoji = "👑"
             message_text = f"{crown_emoji} EN İYİ CASİNO SİTELERİ - TÜRKİYE\n\n" \
+                           "Türkiye'nin en iyi casino sitelerini sizin için listeledik.\n" \
 
             # Butonlar
             buttons = [
@@ -27,15 +29,8 @@ async def send_message_with_image():
                 [telegram.InlineKeyboardButton(text="👑Slottica %200 Yatırım Bonusu",
                                                url="https://gopartner.link/?a=205678&c=184089&s1=6028")],
                 [telegram.InlineKeyboardButton(text="👑Mostbet Toplam 150,000 TL Bonus", url="https://t.ly/eAL_1")],
-
-                [telegram.InlineKeyboardButton(text="🎲Lightning Rulet İstatistik",
-                                               url="https://t.me/rouletteacademystatistics")],
-                [telegram.InlineKeyboardButton(text="🎲Baccarat Tahmin Bot",
-                                               url="https://t.me/academybaccarat_bot")],
-                [telegram.InlineKeyboardButton(text="🎲Rulet Tahmin Bot",
-                                               url="https://t.me/rouletteacademyprediction_bot")],
-                [telegram.InlineKeyboardButton(text="🎲Sponsor Güvenilir Siteler",
-                                               url="https://rouletteacademyturkey.vercel.app/")],
+                [telegram.InlineKeyboardButton(text="👑Marbahis %30 Kripto Yatırım Bonusu",
+                                               url="https://bit.ly/3RF81eI")],
             ]
 
             # Inline keyboard ile butonlar
@@ -47,27 +42,27 @@ async def send_message_with_image():
     except Exception as e:
         print(f"Hata oluştu: {e}")
 
-# Schedule kullanımı için asenkron işlevi sarmalayan bir fonksiyon
+
+# Asenkron işlevi sarmalayan bir fonksiyon
 def job_wrapper():
-    asyncio.ensure_future(send_message_with_image())
-
-# Her 4 saatte bir mesaj paylaşımı için:
-schedule.every(5).seconds.do(job_wrapper)
+    loop = asyncio.get_event_loop()  # Mevcut event loop'u al
+    loop.create_task(send_message_with_image())  # Asenkron görev oluştur
 
 
-# Asenkron döngüyü sürekli çalıştır
+# Her 5 saniyede bir mesaj paylaşımı için:
+schedule.every(4).hours.do(job_wrapper)
+
+
+# Schedule işlevini senkron çalıştırma
 async def run_schedule():
     while True:
         schedule.run_pending()
         await asyncio.sleep(1)
 
+
 # Ana asenkron döngü
 if __name__ == "__main__":
-    loop = asyncio.new_event_loop()  # Yeni bir event loop başlat
-    asyncio.set_event_loop(loop)  # Bu döngüyü aktif olarak ayarla
     try:
-        loop.run_until_complete(run_schedule())
+        asyncio.run(run_schedule())
     except KeyboardInterrupt:
-        pass
-    finally:
-        loop.close()
+        print("Program sonlandırıldı.")
