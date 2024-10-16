@@ -52,7 +52,8 @@ def job_wrapper():
     asyncio.ensure_future(send_message_with_image())
 
 # Her 4 saatte bir mesaj paylaşımı için:
-schedule.every(4).hours.do(job_wrapper)
+schedule.every(5).seconds.do(job_wrapper)
+
 
 # Asenkron döngüyü sürekli çalıştır
 async def run_schedule():
